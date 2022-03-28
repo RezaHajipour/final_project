@@ -5,6 +5,9 @@ import Home from "./Home";
 import About from "./About";
 import Search from "./Search";
 import BecomeCrew from "./BecomeCrew";
+import Register from "./Register";
+import Login from "./Login";
+import Logout from "./Logout";
 
 function App() {
     return (
@@ -26,9 +29,16 @@ function App() {
                     <NavLink exact to="/about" className="nav-link">
                         ABOUT
                     </NavLink>
+                    <Logout />
                 </nav>
             </header>
             <section className="app-container">
+                <Route path="/register">
+                    <Register />
+                </Route>
+                <Route path="/login">
+                    <Login />
+                </Route>
                 <Route path="/about">
                     <About />
                 </Route>

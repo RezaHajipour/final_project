@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function BecomeCrew() {
+function Login() {
     const [formData, setFormData] = useState({});
 
     function onSubmit(event) {
         event.preventDefault();
-        fetch("/api/users", {
+        fetch("/api/login", {
             method: "POST",
             body: JSON.stringify(formData),
             headers: { "Content-Type": "application/json" },
@@ -27,37 +27,14 @@ function BecomeCrew() {
             [event.target.name]: event.target.value,
         });
     }
-
-    console.log(formData);
-
     return (
-        <div className="register-container">
-            <form onSubmit={onSubmit} className="register-form">
-                <h2 className="register-form-h2">Sign Up</h2>
-                <ul className="register-form-ul">
+        <div className="login-container">
+            <form onSubmit={onSubmit} className="login-form">
+                <h2 className="login-form-h2">Login</h2>
+                <ul className="login-form-ul">
                     <li>
                         <input
-                            className="register-input"
-                            type="text"
-                            name="first_name"
-                            required
-                            placeholder="First Name"
-                            onInput={onInput}
-                        />
-                    </li>
-                    <li>
-                        <input
-                            className="register-input"
-                            type="text"
-                            name="last_name"
-                            required
-                            placeholder="Last Name"
-                            onInput={onInput}
-                        />
-                    </li>
-                    <li>
-                        <input
-                            className="register-input"
+                            className="login-input"
                             type="email"
                             name="email"
                             required
@@ -67,7 +44,7 @@ function BecomeCrew() {
                     </li>
                     <li>
                         <input
-                            className="register-input"
+                            className="login-input"
                             type="password"
                             name="password"
                             required
@@ -76,14 +53,14 @@ function BecomeCrew() {
                         />
                     </li>
                     <li>
-                        <button type="submit" className="register-Btn">
-                            REGISTER
+                        <button type="submit" className="login-Btn">
+                            LOGIN
                         </button>
                     </li>
-                    <p className="register-p">
-                        Already Registered?&nbsp;
-                        <Link to="/login" className="login-here">
-                            LOGIN HERE.
+                    <p className="login-p">Don't have an account yet?</p>
+                    <p className="login-p2">
+                        <Link to="/register" className="register-here">
+                            REGISTER HERE
                         </Link>
                     </p>
                 </ul>
@@ -92,4 +69,4 @@ function BecomeCrew() {
     );
 }
 
-export default BecomeCrew;
+export default Login;

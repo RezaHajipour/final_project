@@ -5,7 +5,10 @@ function SearchResults({ searchResults }) {
         <ul className="searchResult-ul">
             {searchResults.map((user) => (
                 <li key={user.id}>
-                    <Link to={`/user/${user.id}`} className="searchResult-link">
+                    <Link
+                        to={`/users/${user.id}`}
+                        className="searchResult-link"
+                    >
                         <div className="card">
                             <img src="../images/background.png" alt="img" />
                             <h3>
