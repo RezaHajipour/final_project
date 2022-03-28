@@ -1,49 +1,33 @@
+import SearchForm from "./SearchForm";
+import SearchResults from "./SearchResults";
+import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
 function Search() {
-    function onSubmit(e) {
-        e.preventDefault();
-        const query = {
-            title: e.target.title.value,
-            location: e.target.location.value,
-            category: e.target.category.value,
-        };
-        const queryString = new URLSearchParams(query).toString();
+    const [searchResults, setSearchResults] = useState([]);
+    const [query, setQuery] = useState(window.location.search.slice(1));
+    const history = useHistory();
+
+    useEffect(() => {
+        // const queryString = window.location.search;
+        fetch("/api/services/search?" + query)
+            .then((res) => res.json())
+            .then((data) => {
+                setSearchResults(data);
+            });
+    }, [query]);
+
+    function onSearch(queryString) {
         console.log(queryString);
-        fetch("/api/services/search?" + queryString);
+        history.push("/search?" + queryString);
+        setQuery(queryString);
     }
+
     return (
-        <form onSubmit={onSubmit}>
-            <input
-                type="search"
-                name="title"
-                placeholder="What are you looking?"
-                required
-                className="search-input"
-            />
-
-            <input
-                type="text"
-                name="location"
-                placeholder="Location"
-                className="search-input"
-            />
-            <input
-                type="text"
-                name="category"
-                placeholder="Choose category"
-                className="search-input"
-                list="list-id"
-            ></input>
-            <datalist id="list-id">
-                <option label="education" value="education" />
-                <option label="sport" value="sport" />
-                <option label="food" value="food" />
-                <option label="transport" value="transport" />
-            </datalist>
-
-            <button type="submit" className="search-button">
-                Search
-            </button>
-        </form>
+        <section>
+            <SearchForm onSearch={onSearch} />
+            <SearchResults searchResults={searchResults} />
+        </section>
     );
 }
 

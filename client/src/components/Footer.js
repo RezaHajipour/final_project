@@ -2,12 +2,12 @@ function Footer() {
     return (
         <section className="footer-container">
             <div className="footer-left">
-                <h1>Contact</h1>
-                <p>Footer left</p>
+                <p>Contact</p>
+                <p>©2022 Reza Hajipour</p>
             </div>
             <div className="footer-right">
-                <h1>Contact</h1>
-                <p>Footer right</p>
+                <p> Photos by Levi Stute, Albert Dera, Piero Nigro,</p>
+                <p>Laura Chouette, Jakob Rosen on Unsplash</p>
             </div>
         </section>
     );
