@@ -6,7 +6,7 @@ function SearchResults({ searchResults }) {
             {searchResults.map((user) => (
                 <li key={user.id}>
                     <Link
-                        to={`/users/${user.id}`}
+                        to={`/services/${user.id}`}
                         className="searchResult-link"
                     >
                         <div className="card">

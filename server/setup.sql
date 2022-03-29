@@ -31,3 +31,5 @@ INSERT INTO services (user_id,title, category, location) VALUES (1, 'service1', 
 INSERT INTO services (user_id,title, category, location) VALUES (2, 'service2', 'education', 'Hamburg, Germany');
 INSERT INTO services (user_id,title, category, location) VALUES (2, 'service3', 'sport', 'Hamburg, Germany');
 INSERT INTO services (user_id,title, category, location) VALUES (1, 'service4', 'transport', 'Berlin, Germany');
+
+INSERT INTO services (user_id,title, category, description, location) VALUES (2, 'DOP', 'Cameraman', 'I am working as a DOP for more than 10 years', 'Berlin, Germany');

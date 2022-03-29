@@ -1,4 +1,5 @@
 // import React from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, NavLink, Route } from "react-router-dom";
 import Footer from "./Footer";
 import Home from "./Home";
@@ -8,8 +9,22 @@ import BecomeCrew from "./BecomeCrew";
 import Register from "./Register";
 import Login from "./Login";
 import Logout from "./Logout";
+import Service from "./Service";
+import DashBoard from "./DashBoard";
 
 function App() {
+    const [user, setUser] = useState({});
+    useEffect(() => {
+        fetch("/api/users/me")
+            .then((res) => res.json())
+            .then((user) => {
+                if (!user) {
+                    return;
+                }
+                setUser(user);
+            });
+    }, []);
+
     return (
         <BrowserRouter>
             <header className="header-container">
@@ -20,19 +35,34 @@ function App() {
                     <NavLink exact to="/search" className="nav-link">
                         SEARCH CREW
                     </NavLink>
-                    <NavLink exact to="/searchByMap" className="nav-link">
-                        SEARCH BY LOCATION
-                    </NavLink>
+
                     <NavLink exact to="/crew" className="nav-link">
                         BECOME A CREW
                     </NavLink>
                     <NavLink exact to="/about" className="nav-link">
                         ABOUT
                     </NavLink>
-                    <Logout />
+                    {user.id ? (
+                        <>
+                            <NavLink exact to="/dashboard" className="nav-link">
+                                Dashboard
+                            </NavLink>
+                            <Logout />
+                        </>
+                    ) : (
+                        <NavLink to="/login" className="nav-link">
+                            Login
+                        </NavLink>
+                    )}
                 </nav>
             </header>
             <section className="app-container">
+                <Route path="/dashboard">
+                    <DashBoard user={user} />
+                </Route>
+                <Route path="/services/:id">
+                    <Service />
+                </Route>
                 <Route path="/register">
                     <Register />
                 </Route>

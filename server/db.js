@@ -111,10 +111,42 @@ function getUserByEmail(email) {
         .query("SELECT * FROM users WHERE email= $1", [email])
         .then((result) => result.rows[0]);
 }
+
+// --------------------------GET service by id-----------------------------
+function getServiceById(id) {
+    return db
+        .query(
+            `SELECT services.*, users.id AS user_id, users.profile_picture_url,
+            users.first_name, users.last_name 
+            FROM services 
+            JOIN users
+            ON  users.id = services.user_id  
+            WHERE services.id = $1
+            `,
+            [id]
+        )
+        .then(({ rows }) => rows[0]);
+}
+
+// --------------------------UPDATE PROFILE PICTURE-----------------------
+
+function updateProfilePicture({ profile_picture_url, user_id }) {
+    return db
+        .query("UPDATE users SET profile_picture_url= $1 WHERE id=$2", [
+            profile_picture_url,
+            user_id,
+        ])
+        .then((result) => result.rows[0]);
+}
+
+// function updateServiceByUserId(){}
+
 module.exports = {
     getUserById,
     createService,
     getServices,
     createUser,
     login,
+    getServiceById,
+    updateProfilePicture,
 };

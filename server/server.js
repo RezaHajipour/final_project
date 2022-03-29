@@ -2,8 +2,17 @@ const express = require("express");
 const app = express();
 const compression = require("compression");
 const path = require("path");
-const { getUserById, getServices, createUser, login } = require("./db");
+const {
+    getUserById,
+    getServices,
+    createUser,
+    login,
+    getServiceById,
+    updateProfilePicture,
+} = require("./db");
 const cookieSession = require("cookie-session");
+const uploader = require("./uploader");
+const { Bucket, s3upload } = require("./s3");
 
 app.use(compression());
 
@@ -16,6 +25,7 @@ const cookieSessionMiddleware = cookieSession({
 //middlewares
 app.use(express.json());
 app.use(cookieSessionMiddleware);
+app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 
@@ -96,6 +106,31 @@ app.post("/api/logout", function (req, res) {
     req.session = null;
     res.json({ success: true });
 });
+
+// **********************------profile------******************************
+// ***********************************************************************
+app.get("/api/services/:id", async function (req, res) {
+    const id = req.params.id;
+    const service = await getServiceById(id);
+    res.json(service);
+});
+
+// **********************-----------PROFILE PICTURE---------**************
+// ***********************************************************************
+app.post(
+    "/api/users/me/picture",
+    uploader.single("profile_picture"),
+    s3upload,
+    async (req, res) => {
+        const profile_picture_url = `https://s3.amazonaws.com/${Bucket}/${req.file.filename}`;
+        console.log(req.session.user_id);
+        await updateProfilePicture({
+            profile_picture_url,
+            user_id: req.session.user_id,
+        });
+        res.json({ profile_picture_url });
+    }
+);
 // ***********************************************************************
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "..", "client", "index.html"));
