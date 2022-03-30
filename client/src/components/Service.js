@@ -15,16 +15,37 @@ function Service() {
     }, [id]);
 
     return (
-        <section className="profile-container">
-            <h1> Service</h1>
-            <img src={service.profile_picture_url} className="profile-img" />
-            <h1>
-                {service.first_name} {service.last_name}
-            </h1>
-            <p>{service.title}</p>
-            <p>{service.category}</p>
-            <p>{service.description}</p>
-            <p>{service.location}</p>
+        <section className="service-container">
+            <div className="service-left">
+                <img
+                    src={service.profile_picture_url}
+                    className="service-picture"
+                />
+                <h1>
+                    {service.first_name} {service.last_name}
+                </h1>
+                <button className="service-contact-btn">Contact</button>
+            </div>
+            <div className="service-right">
+                <p>
+                    <strong className="service">Title: </strong>
+                    {service.title}
+                </p>
+                <p>
+                    <strong className="service">Category: </strong>
+                    {service.category}
+                </p>
+                <p>
+                    <strong className="service">From: </strong>
+                    {service.location}
+                </p>
+                <p>
+                    <strong className="service">
+                        About {service.first_name} :{" "}
+                    </strong>
+                    {service.description}
+                </p>
+            </div>
         </section>
     );
 }

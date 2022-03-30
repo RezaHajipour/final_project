@@ -50,7 +50,7 @@ function getServices({ title, category, location }) {
     return db
         .query(
             `SELECT services.*, users.id AS user_id,
-            users.first_name, users.last_name 
+            users.first_name, users.last_name,  profile_picture_url
             FROM services 
             JOIN users
             ON  users.id = services.user_id  
@@ -71,15 +71,27 @@ function getServices({ title, category, location }) {
 // **********************------REGISTER------*****************************
 // ***********************************************************************
 
-function createUser({ first_name, last_name, email, password }) {
+function createUser({
+    first_name,
+    last_name,
+    email,
+    password,
+    profile_picture_url,
+}) {
     console.log(first_name, last_name, email, password);
     return hash(password).then((password_hash) => {
         return db
             .query(
-                `INSERT INTO users (first_name, last_name, email, password_hash)
-        VALUES($1, $2, $3, $4)
+                `INSERT INTO users (first_name, last_name, email, password_hash, profile_picture_url)
+        VALUES($1, $2, $3, $4, $5)
         RETURNING *`,
-                [first_name, last_name, email, password_hash]
+                [
+                    first_name,
+                    last_name,
+                    email,
+                    password_hash,
+                    profile_picture_url,
+                ]
             )
             .then((result) => result.rows[0]);
     });
@@ -140,6 +152,7 @@ function updateProfilePicture({ profile_picture_url, user_id }) {
 }
 
 // function updateServiceByUserId(){}
+// INSERT INTO services (user_id,title, category, description, location) VALUES ();
 
 module.exports = {
     getUserById,

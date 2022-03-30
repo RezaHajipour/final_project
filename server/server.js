@@ -9,6 +9,7 @@ const {
     login,
     getServiceById,
     updateProfilePicture,
+    createService,
 } = require("./db");
 const cookieSession = require("cookie-session");
 const uploader = require("./uploader");
@@ -107,7 +108,7 @@ app.post("/api/logout", function (req, res) {
     res.json({ success: true });
 });
 
-// **********************------profile------******************************
+// **********************------user profile(service)------******************************
 // ***********************************************************************
 app.get("/api/services/:id", async function (req, res) {
     const id = req.params.id;
@@ -123,7 +124,7 @@ app.post(
     s3upload,
     async (req, res) => {
         const profile_picture_url = `https://s3.amazonaws.com/${Bucket}/${req.file.filename}`;
-        console.log(req.session.user_id);
+        // console.log(req.session.user_id);
         await updateProfilePicture({
             profile_picture_url,
             user_id: req.session.user_id,
@@ -131,6 +132,19 @@ app.post(
         res.json({ profile_picture_url });
     }
 );
+
+// **********************------Become a crew------*****************************
+// ***********************************************************************
+// app.post("/api/services/:id", async function (req, res) {
+//     // console.log(req.body);
+//     // console.log("req session user id", req.session.user_id);
+
+//     const Becomecrew = await createService({
+//         user_id: req.session.user_id,
+//     });
+//     res.json({ Becomecrew });
+// });
+
 // ***********************************************************************
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "..", "client", "index.html"));

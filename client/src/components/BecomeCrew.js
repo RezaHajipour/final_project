@@ -1,18 +1,19 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
-function BecomeCrew() {
+function BecomeCrew({ user }) {
+    console.log("user", user);
     const [formData, setFormData] = useState({});
 
     function onSubmit(event) {
         event.preventDefault();
-        fetch("/api/users", {
+        fetch("/api/services/" + user.id, {
             method: "POST",
             body: JSON.stringify(formData),
             headers: { "Content-Type": "application/json" },
         })
             .then((response) => response.json())
             .then((data) => {
+                console.log("data is", data);
                 if (data.error) {
                     setFormData({ error: data.error });
                     return;
@@ -29,64 +30,67 @@ function BecomeCrew() {
     }
 
     console.log(formData);
-
+    //  <h4>
+    //      Become a Crew in Crew Connector to be reach by thousands of Casting Manager
+    //  </h4>;
     return (
-        <div className="register-container">
-            <form onSubmit={onSubmit} className="register-form">
-                <h2 className="register-form-h2">Sign Up</h2>
-                <ul className="register-form-ul">
-                    <li>
-                        <input
-                            className="register-input"
-                            type="text"
-                            name="first_name"
-                            required
-                            placeholder="First Name"
-                            onInput={onInput}
-                        />
-                    </li>
-                    <li>
-                        <input
-                            className="register-input"
-                            type="text"
-                            name="last_name"
-                            required
-                            placeholder="Last Name"
-                            onInput={onInput}
-                        />
-                    </li>
-                    <li>
-                        <input
-                            className="register-input"
-                            type="email"
-                            name="email"
-                            required
-                            placeholder="Email"
-                            onInput={onInput}
-                        />
-                    </li>
-                    <li>
-                        <input
-                            className="register-input"
-                            type="password"
-                            name="password"
-                            required
-                            placeholder="Password"
-                            onInput={onInput}
-                        />
-                    </li>
-                    <li>
-                        <button type="submit" className="register-Btn">
-                            REGISTER
-                        </button>
-                    </li>
-                    <p className="register-p">
-                        Already Registered?&nbsp;
-                        <Link to="/login" className="login-here">
-                            LOGIN HERE.
-                        </Link>
-                    </p>
-                </ul>
+        <div className="becomeCrew-container">
+            <form onSubmit={onSubmit} className="becomeCrew-form">
+                <p>
+                    Job Title
+                    <input
+                        type="text"
+                        name="title"
+                        placeholder="Write Title of your Profession"
+                        className="becomeCrew-input "
+                        onInput={onInput}
+                    />
+                </p>
+                <p>
+                    Job Category
+                    <input
+                        type="text"
+                        name="category"
+                        onInput={onInput}
+                        placeholder="Choose Category"
+                        className="becomeCrew-input "
+                        list="list-id"
+                    ></input>
+                    <datalist id="list-id">
+                        <option value="Actor/Actress" />
+                        <option value="Art Director" />
+                        <option value="Cameraman" />
+                        <option value="Costume Designer" />
+                        <option value="Director" />
+                        <option value="Editor" />
+                        <option value="Gaffer" />
+                        <option value="Hair & Make Up Artist" />
+                        <option value="Key Grip" />
+                        <option value="Producer" />
+                        <option value="Sound Mixer" />
+                    </datalist>
+                </p>
+                <p>
+                    Job Location
+                    <input
+                        type="text"
+                        name="location"
+                        placeholder="Where are you available to work"
+                        className="becomeCrew-input "
+                        onInput={onInput}
+                    />
+                </p>
+                <p>
+                    Job Description
+                    <textarea
+                        type="text"
+                        name="description"
+                        placeholder="Describe yourself and your profession"
+                        className="becomeCrew-textarea"
+                        onInput={onInput}
+                    />
+                </p>
+                <button className="becomeCrew-btn">Save Changes</button>
             </form>
         </div>
     );

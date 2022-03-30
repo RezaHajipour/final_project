@@ -11,6 +11,7 @@ import Login from "./Login";
 import Logout from "./Logout";
 import Service from "./Service";
 import DashBoard from "./DashBoard";
+import EditDashboard from "./EditDashboard";
 
 function App() {
     const [user, setUser] = useState({});
@@ -57,8 +58,11 @@ function App() {
                 </nav>
             </header>
             <section className="app-container">
-                <Route path="/dashboard">
+                <Route path="/dashboard" exact>
                     <DashBoard user={user} />
+                </Route>
+                <Route path="/dashboard/edit" exact>
+                    <EditDashboard user={user} />
                 </Route>
                 <Route path="/services/:id">
                     <Service />
@@ -73,7 +77,7 @@ function App() {
                     <About />
                 </Route>
                 <Route path="/crew">
-                    <BecomeCrew />
+                    <BecomeCrew user={user} />
                 </Route>
                 <Route path="/search">
                     <Search />

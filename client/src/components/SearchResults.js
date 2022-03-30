@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 function SearchResults({ searchResults }) {
+    console.log(searchResults);
     return (
         <ul className="searchResult-ul">
             {searchResults.map((user) => (
@@ -10,7 +11,7 @@ function SearchResults({ searchResults }) {
                         className="searchResult-link"
                     >
                         <div className="card">
-                            <img src="../images/background.png" alt="img" />
+                            <img src={user.profile_picture_url} alt="img" />
                             <h3>
                                 {user.first_name} {user.last_name}
                             </h3>

@@ -1,4 +1,9 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+function formatDate(timestamp) {
+    const date = new Date(timestamp);
+    return `${date.toLocaleDateString()} @ ${date.toLocaleTimeString()}`;
+}
 
 function DashBoard({ user }) {
     const [service, setService] = useState({});
@@ -30,43 +35,68 @@ function DashBoard({ user }) {
 
     return (
         <section className="dashboard-container">
-            <div>
-                <h1>Dashboard</h1>
-                <p>
-                    Welcome{" "}
-                    <strong>
-                        {" "}
-                        {user.first_name} {user.last_name}
-                    </strong>
-                </p>
-            </div>
+            <div className="dashboard-left">
+                <img
+                    src={user.profile_picture_url}
+                    className="profile-picture"
+                />
 
-            <div className="dashboard-content">
-                <div className="dashboard-left">
-                    <img
-                        src={user.profile_picture_url}
-                        className="profile-picture"
+                <form onSubmit={onSubmit}>
+                    <p className="profile-picture-p">
+                        Change your profile Picture
+                    </p>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        name="avatar"
+                        id="image"
+                        placeholder="User Profile Picture"
+                        required
                     />
-                    <p>Change your profile Picture</p>
-                    <form onSubmit={onSubmit}>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            name="avatar"
-                            id="image"
-                            placeholder="User Profile Picture"
-                            required
-                        />
-                        <button type="submit" className="profile-img-Btn">
-                            UPLOAD
-                        </button>
-                    </form>
+                    <button type="submit" className="profile-img-Btn">
+                        UPLOAD
+                    </button>
+                </form>
+                <div className="edit-dashboard">
+                    <Link to="/dashboard/edit" className="edit-profile-btn">
+                        {" "}
+                        Edit Profile
+                    </Link>
                 </div>
-                <div className="dashboard-right">
-                    <p>category:{service.category}</p>
-                    <p>title:{service.title}</p>
-                    <p>{service.description}</p>
-                    <p>{service.location}</p>
+            </div>
+            <div className="dashboard-right">
+                <div className="right-top">
+                    <h4>
+                        {user.first_name} {user.last_name}
+                    </h4>
+                    <p>
+                        <strong className="strong">Email: </strong>
+                        {user.email}
+                    </p>
+                    <p>
+                        <strong className="strong">Joined: </strong>{" "}
+                        {formatDate(user.created_at)}
+                    </p>
+                </div>
+                <div className="right-bottom">
+                    <h1 className="right-bottom-h1">Crew Info</h1>
+                    <p className="right-bottom-p">
+                        <strong className="strong">Job Title: </strong>
+                        {service.title}
+                    </p>
+                    <p className="right-bottom-p">
+                        <strong className="strong">Job Category: </strong>
+                        {service.category}
+                    </p>
+                    <p className="right-bottom-p">
+                        <strong className="strong">Address: </strong>
+                        {service.location}
+                    </p>
+
+                    <p className="right-bottom-description">
+                        <strong className="strong">Job Description: </strong>
+                        {service.description}
+                    </p>
                 </div>
             </div>
         </section>

@@ -136,24 +136,55 @@ main {
 }
 
 /* *********************** about ******************** */
-
-.about {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    /* max-width: 80%; */
-}
-.about-content {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-}
-.about-img {
-    max-width: 50vw;
-    align-self: flex-start;
+.about-container {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    grid-auto-rows: 1fr;
+    margin: 0 auto;
     height: 80vh;
+    justify-content: space-between;
+    width: 100vw;
+}
+
+.div1 {
+    grid-area: 1 / 1 / 2 / 2;
+    background-image: url("./images/reza-fullstack.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #3f4657;
+}
+.div2 {
+    grid-area: 1 / 2 / 2 / 3;
+    background-color: #fffbf8;
+    place-self: center;
+}
+.div3 {
+    grid-area: 1 / 3 / 2 / 4;
+    background-image: url("./images/diego.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #3f4657;
+}
+.div4 {
+    grid-area: 2 / 1 / 3 / 2;
+    background-color: #fffbf8;
+    place-self: center;
+}
+.div5 {
+    grid-area: 2 / 2 / 3 / 3;
+    background-image: url("./images/spiced_logo.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #3f4657;
+}
+.div6 {
+    grid-area: 2 / 3 / 3 / 4;
+    background-color: #fffbf8;
+    place-self: center;
 }
 
 /* *********************** CARD ******************** */
@@ -182,10 +213,11 @@ main {
 
 .card h3 {
     margin: 0;
-    padding: 0px 12px 0px;
-    line-height: 22px;
+    padding: 4px 10px 0px;
+    line-height: 20px;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 18px;
+    color: #6b0909;
 }
 
 .card .card-content {
@@ -356,10 +388,11 @@ main {
     justify-content: center;
     align-items: stretch;
     flex-direction: row;
+    margin-top: 3rem;
 }
 .login-form {
     width: 25vw;
-    padding: 30px 0;
+    padding: 20px 0;
     /* background: rgba(20, 40, 40, 0.8); */
     background: rgba(225, 227, 228);
     transition: 0.2s;
@@ -396,7 +429,7 @@ main {
     background: rgba(20, 20, 20, 0.6);
     font-size: 18px;
     color: white;
-    margin-top: 20px;
+    margin-top: 15px;
     padding: 10px 45px;
     cursor: pointer;
     transition: 0.4s;
@@ -440,11 +473,12 @@ main {
     justify-content: center;
     align-items: stretch;
     flex-direction: row;
+    margin-top: 1.2rem;
 }
 
 .register-form {
     width: 30vw;
-    padding: 30px 0;
+    padding: 5px 0;
     background: rgba(225, 227, 228);
     transition: 0.2s;
     display: flex;
@@ -515,28 +549,359 @@ main {
 ------------------------DashBoard ----------------------------
 ************************************************************* */
 .dashboard-container {
-    width: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #3f4657;
+    width: 100%;
+    height: 100%;
 }
 
-.dashboard-content {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-}
 .profile-picture {
     width: 250px;
     height: 250px;
 }
 
+.profile-picture-p {
+    color: #fffbf8;
+}
+
+.edit-dashboard {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #fffbf8;
+    margin-top: 1rem;
+}
+
+.edit-dashboard-btn {
+    margin-left: 1rem;
+}
+.dashboard-left {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 30%;
+}
 .dashboard-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #3f4657;
+    flex: 1;
+    height: 600px;
+}
+.right-top {
+    background-color: #454d5f;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+        rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    border-radius: 22px 44px;
+    width: 800px;
+}
+
+.right-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #454d5f;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+        rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    border-radius: 22px 44px;
+    width: 800px;
+    height: 350px;
+}
+
+.right-top > h4 {
+    font-size: 20px;
+    margin-left: 1.5rem;
+    color: #fffbf8;
+}
+
+.right-top > p {
+    font-size: 16px;
+    margin-left: 1.5rem;
+    color: #fffbf8;
+}
+
+.strong {
+    color: #ff5252;
+    letter-spacing: 0.2rem;
+}
+.right-bottom-p {
+    font-size: 16px;
+    margin-left: 1.5rem;
+    color: #fffbf8;
+}
+
+.right-bottom-description {
+    font-size: 16px;
+    margin-left: 1.5rem;
+    color: #fffbf8;
+    line-height: 2rem;
+}
+.right-bottom-h1 {
+    font-size: 18px;
+    margin-left: 1.5rem;
+    color: #fffbf8;
+}
+
+.edit-profile-btn {
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    background-color: #3f4657;
+    -webkit-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    -moz-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+}
+
+.edit-profile-btn:hover {
+    color: #ff5252;
+    transform: scale(1.03);
+}
+
+/* 
+*************************************************************
+------------------------service ----------------------------
+************************************************************* */
+
+.service-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.service-picture {
+    width: 350px;
+    height: 350px;
+    -webkit-box-shadow: 1px -2px 13px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 1px -2px 13px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px -2px 13px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 22px 44px;
+}
+
+.service-left {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 30%;
+}
+
+.service-contact-btn {
+    padding: 17px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    color: #fafafa;
+    font-weight: 600;
+    letter-spacing: 0.2rem;
+    background-color: #6b0909e1;
+    -webkit-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    -moz-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+}
+
+.service-contact-btn:hover {
+    transform: scale(1.03);
+}
+.service-right {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    width: 70%;
+    flex: 1;
+    height: 550px;
+}
+.service {
+    color: #6b0909;
+    letter-spacing: 0.2rem;
+}
+
+/* 
+*************************************************************
+------------------------edit dashboard ----------------------------
+************************************************************* */
+.edit-dashboard-textarea {
+    width: 250px;
+    height: 100px;
+    padding-left: 15px;
+    border-radius: 6px;
+    border: none;
+    color: #939393;
+    font-weight: 500;
+    background-color: #fffbf8;
+    -webkit-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    -moz-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+}
+
+.edit-dashboard-form > p {
+    color: #6b0909;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-dashboard-input {
+    width: 250px;
+    height: 30px;
+    padding-left: 15px;
+    border-radius: 6px;
+    border: none;
+    color: #939393;
+    font-weight: 500;
+    background-color: #fffbf8;
+    -webkit-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    -moz-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+}
+
+.edit-dashboard-btn {
+    padding: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-weight: 500;
+    background-color: rgba(51, 51, 51, 0.5);
+    -webkit-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    -moz-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+}
+
+.edit-dashboard-btn:hover {
+    color: #6b0909;
+}
+
+/* 
+*************************************************************
+------------------------become crew ----------------------------
+************************************************************* */
+.becomeCrew-container {
+    text-align: center;
+    color: white;
+    box-shadow: 3px 10px 20px 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: row;
+    margin-top: 1.2rem;
+}
+
+.becomeCrew-form {
+    width: 30vw;
+    padding: 5px 0;
+    background: rgba(225, 227, 228);
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.becomeCrew-input {
+    width: 250px;
+    height: 30px;
+    padding-left: 15px;
+    border-radius: 6px;
+    border: none;
+    color: #939393;
+    font-weight: 500;
+    background-color: #fffbf8;
+    -webkit-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    -moz-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+}
+
+.becomeCrew-textarea {
+    width: 250px;
+    height: 100px;
+    padding-left: 15px;
+    border-radius: 6px;
+    border: none;
+    color: #939393;
+    font-weight: 500;
+    background-color: #fffbf8;
+    -webkit-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    -moz-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+}
+.becomeCrew-form > p {
+    color: rgba(20, 20, 20, 0.8);
+}
+.becomeCrew-btn {
+    padding: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-weight: 500;
+    background-color: rgba(51, 51, 51, 0.5);
+    -webkit-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    -moz-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+    box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff,
+        0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset,
+        0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+}
+
+.becomeCrew-btn:hover {
+    color: #6b0909;
 }
