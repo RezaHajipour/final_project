@@ -21,7 +21,10 @@ function Service() {
         <section className="service-container">
             <div className="service-left">
                 <img
-                    src={service.profile_picture_url}
+                    src={
+                        service.profile_picture_url ||
+                        "/images/default-avatar.png"
+                    }
                     className="service-picture"
                 />
                 <h1>

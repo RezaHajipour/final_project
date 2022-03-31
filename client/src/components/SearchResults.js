@@ -11,7 +11,13 @@ function SearchResults({ searchResults }) {
                         className="searchResult-link"
                     >
                         <div className="card">
-                            <img src={user.profile_picture_url} alt="img" />
+                            <img
+                                src={
+                                    user.profile_picture_url ||
+                                    "/images/default-avatar.png"
+                                }
+                                alt="img"
+                            />
                             <h3>
                                 {user.first_name} {user.last_name}
                             </h3>
