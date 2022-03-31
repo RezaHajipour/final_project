@@ -33,17 +33,16 @@ function SearchForm({ onSearch }) {
                 list="list-id"
             ></input>
             <datalist id="list-id">
-                <option name="category" value="Actor/Actress" />
-                <option name="category" value="Art Director" />
-                <option name="category" value="Cameraman" />
-                <option name="category" value="Costume Designer" />
-                <option name="category" value="Director" />
-                <option name="category" value="Editor" />
-                <option name="category" value="Gaffer" />
-                <option name="category" value="Hair & Make Up Artist" />
-                <option name="category" value="Key Grip" />
-                <option name="category" value="Producer" />
-                <option name="category" value="Sound Mixer" />
+                <option value="Actor/Actress" />
+                <option value="Director" />
+                <option value="Production" />
+                <option value="Camera and Lighting" />
+                <option value="Costume department" />
+                <option value="Sound Production" />
+                <option value="Hair & Make Up" />
+                <option value="Special effects" />
+                <option value="Post-production" />
+                <option value="Sound and music" />
             </datalist>
             <button type="submit" className="search-button"></button>
         </form>

@@ -10,6 +10,8 @@ const {
     getServiceById,
     updateProfilePicture,
     createService,
+    getServiceByUserId,
+    updateServiceByUserId,
 } = require("./db");
 const cookieSession = require("cookie-session");
 const uploader = require("./uploader");
@@ -41,6 +43,26 @@ app.get("/api/users/me", async function (req, res) {
     res.json(user);
 });
 
+app.get("/api/users/me/service", async function (req, res) {
+    const service = await getServiceByUserId(req.session.user_id);
+    if (!service) {
+        res.json(null);
+        return;
+    }
+    res.json(service);
+});
+
+app.put("/api/users/me/service", async function (req, res) {
+    const service = await updateServiceByUserId({
+        user_id: req.session.user_id,
+        ...req.body,
+    });
+    if (!service) {
+        res.json(null);
+        return;
+    }
+    res.json(service);
+});
 // **********************------SERVICES------*****************************
 // ***********************************************************************
 
@@ -135,15 +157,16 @@ app.post(
 
 // **********************------Become a crew------*****************************
 // ***********************************************************************
-// app.post("/api/services/:id", async function (req, res) {
-//     // console.log(req.body);
-//     // console.log("req session user id", req.session.user_id);
+app.post("/api/services", async function (req, res) {
+    // console.log(req.body);
+    console.log("req session user id", req.session.user_id);
 
-//     const Becomecrew = await createService({
-//         user_id: req.session.user_id,
-//     });
-//     res.json({ Becomecrew });
-// });
+    const Becomecrew = await createService({
+        user_id: req.session.user_id,
+        ...req.body,
+    });
+    res.json({ Becomecrew });
+});
 
 // ***********************************************************************
 app.get("*", function (req, res) {

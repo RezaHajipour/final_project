@@ -25,10 +25,16 @@ function getUserById(id) {
         .then((result) => result.rows[0]);
 }
 
+function getServiceByUserId(user_id) {
+    return db
+        .query("SELECT * FROM services WHERE user_id= $1", [user_id])
+        .then((result) => result.rows[0]);
+}
 // ***********************************************************************
 // **********************------SERVICES------*****************************
 // ***********************************************************************
 function createService({
+    user_id,
     title,
     category,
     location,
@@ -37,10 +43,17 @@ function createService({
 }) {
     return db
         .query(
-            `INSERT INTO services ( title, category, location, description, service_picture_url)
-        VALUES($1, $2, $3, $4, $5)
+            `INSERT INTO services ( user_id, title, category, location, description, service_picture_url)
+        VALUES($1, $2, $3, $4, $5, $6)
         RETURNING *`,
-            [title, category, location, description, service_picture_url]
+            [
+                user_id,
+                title,
+                category,
+                location,
+                description,
+                service_picture_url,
+            ]
         )
         .then((result) => result.rows[0]);
 }
@@ -67,6 +80,23 @@ function getServices({ title, category, location }) {
         .then(({ rows }) => rows);
 }
 
+function updateServiceByUserId({
+    user_id,
+    title,
+    category,
+    location,
+    description,
+}) {
+    console.log(title, category, location, description, user_id);
+    return db
+        .query(
+            `UPDATE services SET title = $1 , category= $2 , location = $3, description = $4 
+        WHERE user_id = $5
+        RETURNING *`,
+            [title, category, location, description, user_id]
+        )
+        .then((result) => result.rows[0]);
+}
 // ***********************************************************************
 // **********************------REGISTER------*****************************
 // ***********************************************************************
@@ -151,7 +181,6 @@ function updateProfilePicture({ profile_picture_url, user_id }) {
         .then((result) => result.rows[0]);
 }
 
-// function updateServiceByUserId(){}
 // INSERT INTO services (user_id,title, category, description, location) VALUES ();
 
 module.exports = {
@@ -162,4 +191,6 @@ module.exports = {
     login,
     getServiceById,
     updateProfilePicture,
+    getServiceByUserId,
+    updateServiceByUserId,
 };

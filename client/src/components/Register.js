@@ -17,7 +17,7 @@ function Register() {
                     setFormData({ error: data.error });
                     return;
                 }
-                window.location.href = "/";
+                window.location.href = "/crew";
             });
     }
 

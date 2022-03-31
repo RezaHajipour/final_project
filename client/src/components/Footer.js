@@ -2,7 +2,10 @@ function Footer() {
     return (
         <section className="footer-container">
             <div className="footer-left">
-                <p>Contact</p>
+                <a href="mailto:rezahajipour@gmail.com" className="mailTo">
+                    Contact
+                </a>
+
                 <p>©2022 Reza Hajipour</p>
             </div>
             <div className="footer-right">

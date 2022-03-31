@@ -46,7 +46,7 @@ function App() {
                     {user.id ? (
                         <>
                             <NavLink exact to="/dashboard" className="nav-link">
-                                Dashboard
+                                DASHBOARD
                             </NavLink>
                             <Logout />
                         </>
@@ -77,7 +77,7 @@ function App() {
                     <About />
                 </Route>
                 <Route path="/crew">
-                    <BecomeCrew user={user} />
+                    {user.id ? <BecomeCrew user={user} /> : <Register />}
                 </Route>
                 <Route path="/search">
                     <Search />

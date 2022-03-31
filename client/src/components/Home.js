@@ -9,9 +9,9 @@ function Home() {
         history.push("/search?" + queryString);
     }
     return (
-        <section>
+        <section className="home-container">
             <h1 className="title1">
-                The Easiest Way to Find Your Crew. Try It NOW!
+                The Easiest Way to Find Your Film Crews. Try It NOW!
             </h1>
             <SearchForm onSearch={onSearch} />
 

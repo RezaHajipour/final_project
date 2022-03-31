@@ -1,17 +1,35 @@
 import { useState, useEffect } from "react";
+import CategorySelect from "./CategorySelect";
 
 function EditDashboard({ user }) {
     const [service, setService] = useState({});
 
     useEffect(() => {
-        fetch("/api/services/" + user.id)
+        fetch("/api/users/me/service")
             .then((res) => res.json())
             .then((data) => setService(data));
     }, [user]);
 
     function onSubmit(e) {
         e.preventDefault();
-        console.log("i am here");
+        console.log("i am here", service);
+        fetch("/api/users/me/service", {
+            method: "PUT",
+            body: JSON.stringify(service),
+            headers: { "Content-Type": "application/json" },
+        })
+            .then((res) => res.json())
+            .then(() => {
+                window.location.href = "/dashboard";
+            });
+    }
+
+    function onCategoryChange(e) {
+        setService({ ...service, category: e.target.value });
+    }
+
+    function onInput(e) {
+        setService({ ...service, [e.target.name]: e.target.value });
     }
     return (
         <form className="edit-dashboard-form" onSubmit={onSubmit}>
@@ -24,6 +42,8 @@ function EditDashboard({ user }) {
                     placeholder="First Name"
                     className="edit-dashboard-input"
                     defaultValue={user.first_name}
+                    onInput={onInput}
+                    required
                 />
             </p>
             <p>
@@ -34,6 +54,8 @@ function EditDashboard({ user }) {
                     placeholder="Last Name"
                     className="edit-dashboard-input"
                     defaultValue={user.last_name}
+                    onInput={onInput}
+                    required
                 />
             </p>
             <p>
@@ -44,6 +66,8 @@ function EditDashboard({ user }) {
                     placeholder="Email"
                     className="edit-dashboard-input"
                     defaultValue={user.email}
+                    onInput={onInput}
+                    required
                 />
             </p>
 
@@ -55,30 +79,17 @@ function EditDashboard({ user }) {
                     placeholder="Write Title of your Profession"
                     className="edit-dashboard-input"
                     defaultValue={service.title}
+                    onInput={onInput}
+                    required
                 />
             </p>
             <p>
                 Job Category
-                <input
-                    type="text"
-                    name="category"
-                    placeholder="Choose Category"
+                <CategorySelect
+                    onChange={onCategoryChange}
+                    category={service.category}
                     className="edit-dashboard-input"
-                    list="list-id"
-                ></input>
-                <datalist id="list-id">
-                    <option value="Actor/Actress" />
-                    <option value="Art Director" />
-                    <option value="Cameraman" />
-                    <option value="Costume Designer" />
-                    <option value="Director" />
-                    <option value="Editor" />
-                    <option value="Gaffer" />
-                    <option value="Hair & Make Up Artist" />
-                    <option value="Key Grip" />
-                    <option value="Producer" />
-                    <option value="Sound Mixer" />
-                </datalist>
+                />
             </p>
             <p>
                 Job Description
@@ -88,6 +99,8 @@ function EditDashboard({ user }) {
                     placeholder="Describe yourself and your profession"
                     className="edit-dashboard-textarea"
                     defaultValue={service.description}
+                    onInput={onInput}
+                    required
                 />
             </p>
             <button className="edit-dashboard-btn">Save Changes</button>

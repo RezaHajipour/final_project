@@ -10,11 +10,11 @@ function DashBoard({ user }) {
 
     useEffect(() => {
         // console.log("incoming id inside useEffect is:", id);
-        fetch("/api/services/" + user.id)
+        fetch("/api/users/me/service")
             .then((res) => res.json())
             .then((data) => setService(data));
         // console.log("set user is", setUser);
-    }, [user]);
+    }, []);
 
     function onSubmit(e) {
         e.preventDefault();
@@ -28,7 +28,7 @@ function DashBoard({ user }) {
             body,
         })
             .then((response) => response.json())
-            .then((data) => {
+            .then(() => {
                 window.location.reload();
             });
     }
@@ -37,7 +37,9 @@ function DashBoard({ user }) {
         <section className="dashboard-container">
             <div className="dashboard-left">
                 <img
-                    src={user.profile_picture_url}
+                    src={
+                        user.profile_picture_url || "/images/default-avatar.png"
+                    }
                     className="profile-picture"
                 />
 
@@ -79,7 +81,7 @@ function DashBoard({ user }) {
                     </p>
                 </div>
                 <div className="right-bottom">
-                    <h1 className="right-bottom-h1">Crew Info</h1>
+                    <h1 className="right-bottom-h1">CREW INFORMATION</h1>
                     <p className="right-bottom-p">
                         <strong className="strong">Job Title: </strong>
                         {service.title}
