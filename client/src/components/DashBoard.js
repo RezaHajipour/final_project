@@ -16,7 +16,7 @@ function DashBoard({ user }) {
         // console.log("incoming id inside useEffect is:", id);
         fetch("/api/users/me/service")
             .then((res) => res.json())
-            .then((data) => setService(data));
+            .then((data) => setService(data || {}));
         // console.log("set user is", setUser);
     }, []);
 
