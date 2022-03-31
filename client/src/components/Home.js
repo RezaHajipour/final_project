@@ -1,8 +1,10 @@
 import SearchForm from "./SearchForm";
 import { useHistory } from "react-router-dom";
+import useTitle from "../hooks/useTitle.js";
 
 function Home() {
     const history = useHistory();
+    useTitle("Home");
 
     function onSearch(queryString) {
         console.log(queryString);

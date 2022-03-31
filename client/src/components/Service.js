@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import useTitle from "../hooks/useTitle.js";
 
 function Service() {
     const { id } = useParams();
     const [service, setService] = useState({});
-    console.log("incoming id from params is:", id);
+    useTitle("Crew Info");
+
+    // console.log("incoming id from params is:", id);
 
     useEffect(() => {
         // console.log("incoming id inside useEffect is:", id);

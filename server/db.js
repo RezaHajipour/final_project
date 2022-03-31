@@ -1,16 +1,32 @@
 const spicedPg = require("spiced-pg");
 const bcrypt = require("bcryptjs");
-const {
-    DATABASE_USER,
-    DATABASE_PASSWORD,
-    DATABASE_NAME,
-} = require("../secrets.json");
+// const {
+//     DATABASE_USER,
+//     DATABASE_PASSWORD,
+//     DATABASE_NAME,
+// } = require("../secrets.json");
 
-console.log(`[db] Connecting to: ${DATABASE_NAME}`);
-const db = spicedPg(
-    `postgres:${DATABASE_USER}:${DATABASE_PASSWORD}@localhost:5432/${DATABASE_NAME}`
-);
+// console.log(`[db] Connecting to: ${DATABASE_NAME}`);
+// const db = spicedPg(
+//     `postgres:${DATABASE_USER}:${DATABASE_PASSWORD}@localhost:5432/${DATABASE_NAME}`
+// );
 
+let db;
+if (process.env.DATABASE_URL) {
+    // the program is running on heroku
+    db = spicedPg(process.env.DATABASE_URL);
+} else {
+    // we are running locally
+    const {
+        DATABASE_USER,
+        DATABASE_PASSWORD,
+        DATABASE_NAME,
+    } = require("../secrets.json");
+    console.log(`[db] Connecting to: ${DATABASE_NAME}`);
+    db = spicedPg(
+        `postgres:${DATABASE_USER}:${DATABASE_PASSWORD}@localhost:5432/${DATABASE_NAME}`
+    );
+}
 const hash = (password) => {
     return bcrypt.genSalt().then((salt) => {
         return bcrypt.hash(password, salt);

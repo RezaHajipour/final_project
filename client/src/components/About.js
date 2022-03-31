@@ -1,4 +1,7 @@
+import useTitle from "../hooks/useTitle.js";
+
 function About() {
+    useTitle("About");
     return (
         <section className="about-container">
             <div className="div1"></div>

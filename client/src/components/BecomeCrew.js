@@ -1,8 +1,10 @@
 import { useState } from "react";
+import useTitle from "../hooks/useTitle.js";
 
 function BecomeCrew({ user }) {
     console.log("user", user);
     const [formData, setFormData] = useState({});
+    useTitle("Become Crew");
 
     function onSubmit(event) {
         event.preventDefault();

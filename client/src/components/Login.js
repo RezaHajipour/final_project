@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useTitle from "../hooks/useTitle.js";
 
 function Login() {
     const [formData, setFormData] = useState({});
+    useTitle("Login");
 
     function onSubmit(event) {
         event.preventDefault();

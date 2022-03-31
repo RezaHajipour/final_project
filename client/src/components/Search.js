@@ -2,11 +2,13 @@ import SearchForm from "./SearchForm";
 import SearchResults from "./SearchResults";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import useTitle from "../hooks/useTitle.js";
 
 function Search() {
     const [searchResults, setSearchResults] = useState([]);
     const [query, setQuery] = useState(window.location.search.slice(1));
     const history = useHistory();
+    useTitle("Search");
 
     useEffect(() => {
         // const queryString = window.location.search;

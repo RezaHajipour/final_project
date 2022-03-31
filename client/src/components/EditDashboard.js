@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import CategorySelect from "./CategorySelect";
+import useTitle from "../hooks/useTitle.js";
 
 function EditDashboard({ user }) {
     const [service, setService] = useState({});
+    useTitle("Edit Dashboard");
 
     useEffect(() => {
         fetch("/api/users/me/service")
