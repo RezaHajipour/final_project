@@ -1,4 +1,8 @@
+import CategorySelect from "./CategorySelect";
+import { useState } from "react";
+
 function SearchForm({ onSearch }) {
+    const [service, setService] = useState({});
     function onSubmit(e) {
         e.preventDefault();
         const query = {
@@ -9,6 +13,10 @@ function SearchForm({ onSearch }) {
         const queryString = new URLSearchParams(query).toString();
         // console.log(queryString);
         onSearch(queryString);
+    }
+
+    function onCategoryChange(e) {
+        setService({ ...service, category: e.target.value });
     }
     return (
         <form onSubmit={onSubmit} className="search-form">
@@ -25,25 +33,11 @@ function SearchForm({ onSearch }) {
                 placeholder="Location"
                 className="search-input"
             />
-            <input
-                type="text"
-                name="category"
-                placeholder="Choose category"
-                className="search-input"
-                list="list-id"
-            ></input>
-            <datalist id="list-id">
-                <option value="Actor/Actress" />
-                <option value="Director" />
-                <option value="Production" />
-                <option value="Camera and Lighting" />
-                <option value="Costume department" />
-                <option value="Sound Production" />
-                <option value="Hair & Make Up" />
-                <option value="Special effects" />
-                <option value="Post-production" />
-                <option value="Sound and music" />
-            </datalist>
+            <CategorySelect
+                onChange={onCategoryChange}
+                category={service.category}
+                className="edit-dashboard-input"
+            />
             <button type="submit" className="search-button"></button>
         </form>
     );
