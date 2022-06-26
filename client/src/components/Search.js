@@ -27,7 +27,7 @@ function Search() {
 
     return (
         <section className="search-container">
-            <h1>Search Film Crews by title, Category or Location</h1>
+            <h1>Search Film Crew by title, Category or Location</h1>
             <SearchForm onSearch={onSearch} />
             <SearchResults searchResults={searchResults} />
         </section>

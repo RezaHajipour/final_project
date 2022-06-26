@@ -13,7 +13,7 @@ function Home() {
     return (
         <section className="home-container">
             <h1 className="title1">
-                The Easiest Way to Find Your Film Crews. Try It NOW!
+                The Easiest Way to Find Your Film Crew. Try It NOW!
             </h1>
             <SearchForm onSearch={onSearch} />
 

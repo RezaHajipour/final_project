@@ -23,7 +23,7 @@ function SearchForm({ onSearch }) {
             <input
                 type="search"
                 name="title"
-                placeholder="What are you looking for?"
+                placeholder="Job Title"
                 className="search-input"
             />
 

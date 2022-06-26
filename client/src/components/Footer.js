@@ -6,7 +6,13 @@ function Footer() {
                     Contact
                 </a>
 
-                <p>©2022 Reza Hajipour</p>
+                <p>
+                    Copyright &copy;{" "}
+                    <a href="https://www.rezahajipour.com" className="mailTo">
+                        REZA HAJIPOUR
+                    </a>{" "}
+                    {new Date().getFullYear()}
+                </p>
             </div>
             <div className="footer-right">
                 <p> Photos by Levi Stute, Albert Dera, Piero Nigro,</p>
